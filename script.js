@@ -19,7 +19,9 @@ const calculateBill = () => {
   // calculate the per person total (total divided by number of people)
   const perPersonTotal = total / numberOfPeople
   // update the perPersonTotal on DOM & show it to user
-  perPersonTotalDiv.innerText = `$${perPersonTotal.toFixed(2)}`
+  /*  perPersonTotalDiv.innerText = `$${perPersonTotal.perPersonTotalLs.toFixed(2)}`  */
+  perPersonTotalDiv.innerText = `$${perPersonTotal.toLocaleString(undefined, {maximumFractionDigits: 2})}`
+  
 }
 
 // ** Splits the bill between more people **
@@ -37,11 +39,12 @@ const increasePeople = () => {
 const decreasePeople = () => {
   // if amount is 1 or less simply return
   // can't decrease the number of people to 0 or negative!
+  // Guard Clause
   if (numberOfPeople <= 1) {
-    return
+    throw 'You cannot have less than 1 person!'
   }
   // decrement the amount of people
-  numberOfPeople -= 1
+  numberOfPeople -= 1  
   // update the DOM with the new number of people
   numberOfPeopleDiv.innerText = numberOfPeople
   // calculate the bill based on the new number of people
